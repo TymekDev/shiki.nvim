@@ -5,8 +5,9 @@ local root = function(...)
   return vim.fs.joinpath(vim.fn.stdpath("data") --[[@as string]], "shiki", ...)
 end
 
----@param config shiki.InstallOptions
+---@param config? shiki.InstallConfig
 local install_shiki = function(config)
+  config = vim.tbl_deep_extend("force", config or {}, require("shiki.config").defaults.install or {})
   local shiki = "shiki"
   if config.version ~= nil then
     shiki = "shiki@" .. config.version
@@ -23,7 +24,7 @@ local install_shiki = function(config)
 end
 
 ---Initalize a shiki.nvim's node directory
----@param config shiki.InstallOptions
+---@param config? shiki.InstallConfig
 M.init = function(config)
   if vim.fn.isdirectory(root()) == 1 then
     return
@@ -39,7 +40,7 @@ M.purge = function()
 end
 
 ---Calls `purge()` followed by `init(config)`
----@param config shiki.InstallOptions
+---@param config? shiki.InstallConfig
 M.rebuild = function(config)
   M.purge()
   M.init(config)

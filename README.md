@@ -52,7 +52,7 @@ requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console
 ## Configuration
 
 ```lua
----@type shiki.Options
+---@type shiki.Config
 local defaults = {
   -- Create Shiki command?
   cmd = true,

@@ -1,26 +1,11 @@
+local config = require("shiki.config")
 local highlight = require("shiki.highlight")
 local node = require("shiki.node")
 local M = {}
 
----@type shiki.Options
-local defaults = {
-  -- Create Shiki command?
-  cmd = true,
-  install = {
-    -- Node package manager to install with
-    cmd = "npm",
-    -- Addtional arguments to the package manager
-    args = { "install", "--save-dev" },
-    -- Shiki version
-    version = "1.10.3",
-  },
-  -- Remove and reinitialize a shiki.nvim's internal directory?
-  rebuild = false,
-}
-
----@param opts shiki.Options
+---@param opts? shiki.Config
 M.setup = function(opts)
-  opts = vim.tbl_deep_extend("force", defaults, opts or {})
+  opts = vim.tbl_deep_extend("force", config.defaults, opts or {})
   if opts.rebuild == true then
     node.rebuild(opts.install)
   else
