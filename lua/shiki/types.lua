@@ -1,4 +1,5 @@
 ---@class (exact) shiki.Options
+---@field cmd? boolean
 ---@field install? shiki.InstallOptions
 ---@field rebuild? boolean
 
