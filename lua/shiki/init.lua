@@ -37,4 +37,20 @@ M.setup = function(opts)
   end
 end
 
+---List supported lanuages
+---@return string[]
+M.langs = function()
+  local langs_json = node.exec([[import { bundledLanguages } from "shiki/langs";
+console.log(JSON.stringify(Object.keys(bundledLanguages)));]])
+  return vim.json.decode(langs_json)
+end
+
+---List supported themes
+---@return string[]
+M.themes = function()
+  local themes_json = node.exec([[import { bundledThemes } from "shiki/themes";
+console.log(JSON.stringify(Object.keys(bundledThemes)));]])
+  return vim.json.decode(themes_json)
+end
+
 return M
