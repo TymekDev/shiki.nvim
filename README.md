@@ -111,4 +111,6 @@ This script is not ideal.
 It requires the code to be in a file and it does not detect a language.
 I realized that for the most part, the code I want to share lives in my editor.
 
-_Why should it be any more effort than selecting the relevant part and running a single command?_
+_Why should it be any more effort than selecting the relevant part and running a single command?_&mdash;I asked myself.
+
+...and that's how shiki.nvim came to be.
