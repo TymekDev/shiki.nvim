@@ -1,10 +1,14 @@
+local config = require("shiki.config")
 local node = require("shiki.node")
 local M = {}
 
 ---@param code string
 ---@param lang string
+---@param cfg? shiki.HighlightConfig
 ---@return string
-local script = function(code, lang)
+local script = function(code, lang, cfg)
+  cfg = vim.tbl_deep_extend("force", config.defaults.highlight, cfg or {})
+  local cfg_json = string.gsub(vim.json.encode(cfg), '"', '\\"')
   code = string.gsub(code, "\n", "\\n")
   code = string.gsub(code, '"', '\\"')
   return string.format(
@@ -12,41 +16,40 @@ local script = function(code, lang)
 
 const result = await codeToHtml("%s", {
   lang: "%s",
-  themes: {
-    light: "github-light",
-    dark: "github-dark",
-  },
-  defaultColor: false,
+  ...JSON.parse("%s"),
 });
 
 console.log(result);]],
     code,
-    lang
+    lang,
+    cfg_json
   )
 end
 
 ---@param code string|string[]
 ---@param lang string
+---@param cfg? shiki.HighlightConfig
 ---@return string # An HTML code with a highlighted syntax
-M.code = function(code, lang)
+M.code = function(code, lang, cfg)
   if type(code) == "table" then
     code = table.concat(code, "\n")
   end
-  local result = node.exec(script(code, lang))
+  local result = node.exec(script(code, lang, cfg))
   result = string.gsub(result, "\n$", "")
   return result
 end
 
 ---@param bufnr integer
 ---@param lines number|[number, number]
+---@param cfg? shiki.HighlightConfig
 ---@return string # An HTML code with a highlighted syntax
-M.lines = function(bufnr, lines)
+M.lines = function(bufnr, lines, cfg)
   if type(lines) == "number" then
     lines = { lines, lines }
   end
   local code = vim.api.nvim_buf_get_lines(bufnr, lines[1] - 1, lines[2], true)
   -- NOTE: this might break. There might exist filetypes that are not what the "lang" option expects.
-  return M.code(code, vim.bo[bufnr].filetype)
+  return M.code(code, vim.bo[bufnr].filetype, cfg)
 end
 
 return M

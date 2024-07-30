@@ -16,7 +16,7 @@ M.setup = function(cfg)
       "Shiki",
       ---@param tbl { line1: number, line2: number }
       function(tbl)
-        local result = highlight.lines(0, { tbl.line1, tbl.line2 })
+        local result = highlight.lines(0, { tbl.line1, tbl.line2 }, cfg.highlight)
         vim.fn.setreg("+", vim.split(result, "\n"))
       end,
       {
