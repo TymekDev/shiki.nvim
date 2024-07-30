@@ -4,6 +4,6 @@ return {
   "TymekDev/shiki.nvim",
   cmd = "Shiki",
   ---@module "shiki"
-  ---@type shiki.Options
+  ---@type shiki.Config
   opts = {},
 }

@@ -3,15 +3,15 @@ local highlight = require("shiki.highlight")
 local node = require("shiki.node")
 local M = {}
 
----@param opts? shiki.Config
-M.setup = function(opts)
-  opts = vim.tbl_deep_extend("force", config.defaults, opts or {})
-  if opts.rebuild == true then
-    node.rebuild(opts.install)
+---@param cfg? shiki.Config
+M.setup = function(cfg)
+  cfg = vim.tbl_deep_extend("force", config.defaults, cfg or {})
+  if cfg.rebuild == true then
+    node.rebuild(cfg.install)
   else
-    node.init(opts.install)
+    node.init(cfg.install)
   end
-  if opts.cmd == true then
+  if cfg.cmd == true then
     vim.api.nvim_create_user_command(
       "Shiki",
       ---@param tbl { line1: number, line2: number }

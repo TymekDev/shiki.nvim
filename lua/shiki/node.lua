@@ -1,3 +1,4 @@
+local config = require("shiki.config")
 local M = {}
 
 ---@param ... string
@@ -5,14 +6,14 @@ local root = function(...)
   return vim.fs.joinpath(vim.fn.stdpath("data") --[[@as string]], "shiki", ...)
 end
 
----@param config? shiki.InstallConfig
-local install_shiki = function(config)
-  config = vim.tbl_deep_extend("force", config or {}, require("shiki.config").defaults.install or {})
+---@param cfg? shiki.InstallConfig
+local install_shiki = function(cfg)
+  cfg = vim.tbl_deep_extend("force", cfg or {}, config.defaults.install or {})
   local shiki = "shiki"
-  if config.version ~= nil then
-    shiki = "shiki@" .. config.version
+  if cfg.version ~= nil then
+    shiki = "shiki@" .. cfg.version
   end
-  local cmd = vim.iter({ config.cmd, config.args, shiki }):flatten():totable()
+  local cmd = vim.iter({ cfg.cmd, cfg.args, shiki }):flatten():totable()
   vim.system(cmd, { cwd = root() }, function(result)
     if result.code ~= 0 then
       error(string.format("shiki.nvim: failed to run '%s':\n%s", table.concat(cmd, " "), result.stderr))
@@ -24,14 +25,14 @@ local install_shiki = function(config)
 end
 
 ---Initalize a shiki.nvim's node directory
----@param config? shiki.InstallConfig
-M.init = function(config)
+---@param cfg? shiki.InstallConfig
+M.init = function(cfg)
   if vim.fn.isdirectory(root()) == 1 then
     return
   end
   vim.fn.mkdir(root(), "p")
   vim.fn.writefile({ '{"name":"shiki.nvim","private":true}' }, root("package.json"))
-  install_shiki(config)
+  install_shiki(cfg)
 end
 
 ---Delete the shiki.nvim's node directory
@@ -40,10 +41,10 @@ M.purge = function()
 end
 
 ---Calls `purge()` followed by `init(config)`
----@param config? shiki.InstallConfig
-M.rebuild = function(config)
+---@param cfg? shiki.InstallConfig
+M.rebuild = function(cfg)
   M.purge()
-  M.init(config)
+  M.init(cfg)
 end
 
 ---Exec an inline script within the shiki.nvim's node directory
