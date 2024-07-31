@@ -87,7 +87,7 @@ That's how I came up with a simple script to create syntax-highlighted code snip
 
 ```js
 // Usage:
-//    node highlight.js <lang> <file> | copy
+//    node highlight.js FILE [LANG] | pbcopy
 import { readFileSync } from "node:fs";
 import { codeToHtml } from "shiki";
 
