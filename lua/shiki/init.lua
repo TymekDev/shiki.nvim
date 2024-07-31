@@ -14,14 +14,21 @@ M.setup = function(cfg)
   if cfg.cmd == true then
     vim.api.nvim_create_user_command(
       "Shiki",
-      ---@param tbl { line1: number, line2: number }
+      ---@param tbl { args: string, line1: number, line2: number }
       function(tbl)
-        local result = highlight.lines(0, { tbl.line1, tbl.line2 }, cfg.highlight)
+        if tbl.args == "" then
+          tbl.args = nil
+        end
+        local result = highlight.lines(0, { tbl.line1, tbl.line2 }, tbl.args, cfg.highlight)
         vim.fn.setreg("+", vim.split(result, "\n"))
       end,
       {
         desc = "Copy a syntax-highlighted HTML code of a selected text or a provided range (powered by shiki)",
         range = true,
+        nargs = "?",
+        complete = function()
+          return M.langs()
+        end,
       }
     )
   end

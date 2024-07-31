@@ -27,11 +27,16 @@ shiki.nvim has a default plugin spec (see [`lazy.lua`](./lazy.lua)). It lazy loa
 
 ## Usage
 
-### `Shiki` Command
-
 - `:Shiki` command works either on a selection or on a range
+- `:Shiki` has a single optional argument - a language to highlight
+- If the language argument is not specified, then filetype is passed to Shiki
+
 - Use `:%Shiki` to generate a snippet from an entire file
 - Use `:Shiki` to generate a snippet from the current line
+- Use `:Shiki` with an active selection to generate a snippet from the selection
+
+> [!TIP]
+> Language override might come in handy when working with code snippets in markdown or CSS/JS inside HTML.
 
 ### Lua
 
