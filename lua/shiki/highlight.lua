@@ -41,15 +41,17 @@ end
 
 ---@param bufnr integer
 ---@param lines number|[number, number]
+---@param lang? string If not provided or `nil`, then a `bufnr` buffer's filetype is used
 ---@param cfg? shiki.HighlightConfig
 ---@return string # An HTML code with a highlighted syntax
-M.lines = function(bufnr, lines, cfg)
+M.lines = function(bufnr, lines, lang, cfg)
+  lang = lang or vim.bo[bufnr].filetype
   if type(lines) == "number" then
     lines = { lines, lines }
   end
   local code = vim.api.nvim_buf_get_lines(bufnr, lines[1] - 1, lines[2], true)
   -- NOTE: this might break. There might exist filetypes that are not what the "lang" option expects.
-  return M.code(code, vim.bo[bufnr].filetype, cfg)
+  return M.code(code, lang, cfg)
 end
 
 return M
