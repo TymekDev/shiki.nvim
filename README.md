@@ -115,6 +115,8 @@ const result = await codeToHtml(code, {
 console.log(result);
 ```
 
+You can read more about it in my _[HTML Code Snippets with Syntax Highlighting](https://blog.tymek.dev/html-code-snippets-with-syntax-highlighting/)_ post.
+
 This script is not ideal.
 It requires the code to be in a file and it does not detect a language.
 I realized that for the most part, the code I want to share lives in my editor.
