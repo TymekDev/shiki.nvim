@@ -8,7 +8,7 @@ end
 
 ---@param cfg? shiki.InstallConfig
 local install_shiki = function(cfg)
-  cfg = vim.tbl_deep_extend("force", cfg or {}, config.defaults.install or {})
+  cfg = vim.tbl_deep_extend("force", config.defaults.install or {}, cfg or {})
   local shiki = "shiki"
   if cfg.version ~= nil then
     shiki = "shiki@" .. cfg.version
