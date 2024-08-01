@@ -7,8 +7,8 @@ local M = {}
 ---@param cfg? shiki.HighlightConfig
 ---@return string
 local script = function(code, lang, cfg)
-  cfg = vim.tbl_deep_extend("force", config.defaults.highlight, cfg or {})
-  local cfg_json = string.gsub(vim.json.encode(cfg), '"', '\\"')
+  cfg = vim.tbl_deep_extend("force", config.defaults.highlight or {}, cfg or {})
+  local shiki_cfg = string.gsub(vim.json.encode(cfg.shiki), '"', '\\"')
   code = string.gsub(code, "\n", "\\n")
   code = string.gsub(code, '"', '\\"')
   return string.format(
@@ -22,7 +22,7 @@ const result = await codeToHtml("%s", {
 console.log(result);]],
     code,
     lang,
-    cfg_json
+    shiki_cfg
   )
 end
 

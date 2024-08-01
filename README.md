@@ -61,11 +61,14 @@ requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console
 {
   -- Create Shiki command?
   cmd = true,
-  -- Shiki configuration (passed to `codeToHTML`)
   highlight = {
-    themes = {
-      dark = "github-dark",
-      light = "github-light",
+    -- Shiki configuration (passed to `codeToHTML`)
+    shiki = {
+      defaultColor = false,
+      themes = {
+        dark = "github-dark",
+        light = "github-light",
+      },
     },
   },
   install = {

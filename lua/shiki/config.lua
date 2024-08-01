@@ -4,12 +4,14 @@ local M = {}
 M.defaults = {
   -- Create Shiki command?
   cmd = true,
-  -- Shiki configuration (passed to `codeToHTML`)
   highlight = {
-    defaultColor = false,
-    themes = {
-      dark = "github-dark",
-      light = "github-light",
+    -- Shiki configuration (passed to `codeToHTML`)
+    shiki = {
+      defaultColor = false,
+      themes = {
+        dark = "github-dark",
+        light = "github-light",
+      },
     },
   },
   install = {
