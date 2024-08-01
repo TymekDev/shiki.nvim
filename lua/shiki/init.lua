@@ -6,7 +6,7 @@ local M = {}
 ---@param cfg? shiki.Config
 M.setup = function(cfg)
   cfg = vim.tbl_deep_extend("force", config.defaults, cfg or {})
-  if cfg.rebuild == true then
+  if cfg.install ~= nil and cfg.install.rebuild == true then
     node.rebuild(cfg.install)
   else
     node.init(cfg.install)

@@ -2,7 +2,6 @@
 ---@field cmd? boolean
 ---@field highlight? shiki.HighlightConfig
 ---@field install? shiki.InstallConfig
----@field rebuild? boolean
 
 ---@alias shiki.HighlightConfig shiki.SingleHighlightConfig|shiki.DualHighlightConfig
 
@@ -17,3 +16,4 @@
 ---@field cmd? string
 ---@field args? string[]
 ---@field version? string
+---@field rebuild? boolean

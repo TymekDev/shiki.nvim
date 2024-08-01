@@ -48,7 +48,7 @@ require("shiki").langs()
 require("shiki").themes()
 
 -- Rebuild Node a shiki.nvim's internal directory
-require("shiki").setup({ rebuild = true })
+require("shiki").setup({ install = { rebuild = true } })
 
 -- Execute JS code in the shiki.nvim's internal directory
 requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console.log(bundledThemes)')
@@ -75,14 +75,14 @@ requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console
     args = { "install", "--save-dev" },
     -- Shiki version
     version = "1.10.3",
+    -- Remove and reinitialize a shiki.nvim's internal directory?
+    rebuild = false,
   },
-  -- Remove and reinitialize a shiki.nvim's internal directory?
-  rebuild = false,
 }
 ```
 
 > [!IMPORTANT]
-> If you want to change Shiki version, then either call `setup()` function with `rebuild = true` once or run `require("shiki.node").purge()`.
+> If you want to change Shiki version, then either call `setup()` function with `{ install = { rebuild = true } }` once or run `require("shiki.node").purge()`.
 
 ## Motivation
 

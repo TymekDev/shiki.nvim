@@ -19,9 +19,9 @@ M.defaults = {
     args = { "install", "--save-dev" },
     -- Shiki version
     version = "1.10.3",
+    -- Remove and reinitialize a shiki.nvim's internal directory?
+    rebuild = false,
   },
-  -- Remove and reinitialize a shiki.nvim's internal directory?
-  rebuild = false,
 }
 
 return M
