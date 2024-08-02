@@ -77,7 +77,7 @@ requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console
     -- Addtional arguments to the package manager
     args = { "install", "--save-dev" },
     -- Shiki version
-    version = "1.10.3",
+    version = "1.12.0",
     -- Remove and reinitialize a shiki.nvim's internal directory?
     rebuild = false,
   },
