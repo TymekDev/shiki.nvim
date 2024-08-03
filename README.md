@@ -7,6 +7,10 @@ Powered by [Shiki](https://shiki.style/).
 > [!IMPORTANT]
 > The HTML snippet requires [an additional CSS code](https://blog.tymek.dev/html-code-snippets-with-syntax-highlighting/#the-css-to-enable-the-dual-theme) to work.
 
+## Demo
+
+[demo.webm](https://github.com/user-attachments/assets/78fdacba-f792-4290-bf06-fac2cb7bcbed)
+
 ## Requirements
 
 - `node`
