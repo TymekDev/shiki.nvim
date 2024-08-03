@@ -9,12 +9,12 @@ local M = {}
 local script = function(code, lang, cfg)
   cfg = vim.tbl_deep_extend("force", config.defaults.highlight or {}, cfg or {})
   local shiki_cfg = string.gsub(vim.json.encode(cfg.shiki), '"', '\\"')
-  code = string.gsub(code, "\n", "\\n")
-  code = string.gsub(code, '"', '\\"')
+  code = string.gsub(code, "\\n", "\\\\n")
+  code = string.gsub(code, "`", "\\`")
   return string.format(
     [[import { codeToHtml } from "shiki";
 
-const result = await codeToHtml("%s", {
+const result = await codeToHtml(`%s`, {
   lang: "%s",
   ...JSON.parse("%s"),
 });
