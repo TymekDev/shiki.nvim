@@ -4,6 +4,9 @@ Use `:Shiki` to effortlessly get a syntax-highlighted HTML code snippet of a sel
 
 Powered by [Shiki](https://shiki.style/).
 
+> [!IMPORTANT]
+> The HTML snippet requires [an additional CSS code](https://blog.tymek.dev/html-code-snippets-with-syntax-highlighting/#the-css-to-enable-the-dual-theme) to work.
+
 ## Requirements
 
 - `node`
@@ -27,16 +30,20 @@ shiki.nvim has a default plugin spec (see [`lazy.lua`](./lazy.lua)). It lazy loa
 
 ## Usage
 
-- `:Shiki` command works either on a selection or on a range
-- `:Shiki` has a single optional argument - a language to highlight
-- If the language argument is not specified, then filetype is passed to Shiki
+### `Shiki` Command
 
+- `:Shiki` command works either on a selection or on a range
+- `:Shiki` has a single optional argument&mdash;a language to highlight
+  - For example, run `:Shiki css` inside an HTML file to get CSS properly highlighted
+  - If the language argument is not specified, then filetype is passed to Shiki[^1]
 - Use `:%Shiki` to generate a snippet from an entire file
 - Use `:Shiki` to generate a snippet from the current line
 - Use `:Shiki` with an active selection to generate a snippet from the selection
 
-> [!TIP]
-> Language override might come in handy when working with code snippets in markdown or CSS/JS inside HTML.
+[^1]:
+    This won't always work.
+    There might be filetypes that don't translate to Shiki's lang argument.
+    If you find one, then please [raise an issue](https://github.com/TymekDev/shiki.nvim/issues/new/choose).
 
 ### Lua
 
@@ -85,13 +92,13 @@ requie("shiki.node").exec('import { bundledThemes } from "shiki/themes"; console
 ```
 
 > [!IMPORTANT]
-> If you want to change Shiki version, then either call `setup()` function with `{ install = { rebuild = true } }` once or run `require("shiki.node").purge()`.
+> If you want to change Shiki version, then run `setup()` with `rebuild = true` **once** or run `require("shiki.node").purge()`.
 
 ## Motivation
 
 Recently, I have switched to writing blog posts directly in HTML (see [_A New Post Layout_](https://blog.tymek.dev/a-new-post-layout/)).
 I wanted to keep code snippets with syntax highlighting, though.
-That's how I came up with a simple script to create syntax-highlighted code snippets using Shiki:
+That's how I came up with a script to create syntax-highlighted code snippets using Shiki:
 
 ```js
 // Usage:
