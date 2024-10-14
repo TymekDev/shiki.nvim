@@ -22,7 +22,7 @@ Powered by [Shiki](https://shiki.style/).
 shiki.nvim has a default plugin spec (see [`lazy.lua`](./lazy.lua)). It lazy loads by default!
 
 ```lua
----@module "freeze"
+---@module "lazy"
 ---@type LazySpec
 {
   "TymekDev/shiki.nvim"
